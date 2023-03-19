@@ -1,0 +1,79 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            align-items: center;
+        }
+        .clock{
+            text-align: center;
+            margin: auto;
+            width: 300px;
+            font-size: 40px;
+        }
+        .hour{
+            color: red;
+        }
+        .min{
+            color: darkgreen;
+        }
+        .sec{
+            color: blue;
+        }
+        input{
+            width: 100px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="clock">
+        <span class="hour">hh</span>
+        <span class="min">mm</span>
+        <span class="sec">ss</span>
+        <div>
+            <input type="button" onclick="timerStart()" value="Start">
+            <input type="button" onclick="timerStop()" value="Stop">
+        </div>
+    </div>
+    <script>
+        "use strict"
+
+        function update(){
+            let timer = document.querySelector('.clock')
+            let date = new Date();
+            let hours = date.getHours();
+            let min = date.getMinutes();
+            let sec = date.getSeconds();
+
+            if (hours < 10) hours = '0' + hours;
+            timer.children[0].innerHTML = hours;
+
+            if (min < 10) min = '0' + min;
+            timer.children[1].innerHTML = min;
+
+            if (sec < 10) sec = '0' + sec;
+            timer.children[2].innerHTML = sec;
+        }
+
+        let timerId;
+
+        function timerStart() {
+            timerId = setInterval(update, 1000);
+            update();
+        }
+
+        function timerStop() {
+            clearInterval(timerId);
+            timerId = null;
+        }
+        //let clock = document.querySelector('.clock');
+        //update(clock);
+    </script>
+</body>
+</html>

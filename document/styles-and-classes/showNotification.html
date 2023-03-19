@@ -1,0 +1,44 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            position: absolute;
+            width: 100px;
+            font-size: 30px ;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function showNotification(options) {
+            let optVals = Object.values(options);
+            let optKeys = Object.keys(options);
+            let div = document.createElement('div');
+            div.style.cssText = `
+                ${optKeys[0]} : ${optVals[0]};
+                ${optKeys[1]} : ${optVals[1]}
+            `;
+            div.innerHTML = optVals[2];
+            if (options.length >= 4) div.className = optVals[3];
+            document.body.append(div);
+
+            setTimeout(() => div.remove(), 1500);
+        }
+
+        let i = 1;
+        setInterval(() => {
+          showNotification({
+            top: 10,
+            right: 10,
+            html: 'Hello ' + i++,
+            className: "welcome"
+          });
+        }, 2000);
+    </script>
+</body>
+</html>

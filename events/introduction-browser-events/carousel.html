@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+          padding: 10px;
+        }
+
+        .carousel {
+          position: relative;
+          width: 398px;
+          padding: 10px 40px;
+          border: 1px solid #CCC;
+          border-radius: 15px;
+          background: green;
+          margin: 200px auto;
+
+        }
+
+        .carousel img {
+          width: 130px;
+          height: 130px;
+          /* делаем этот элемент блочным, чтобы убрать лишнее пространство вокруг картинок */
+          display: block;
+        }
+
+        .arrow {
+          position: absolute;
+          top: 60px;
+          padding: 0;
+          background: #ddd;
+          border-radius: 15px;
+          border: 1px solid gray;
+          font-size: 24px;
+          line-height: 24px;
+          color: #444;
+          display: block;
+        }
+
+        .arrow:focus {
+          outline: none;
+        }
+
+        .arrow:hover {
+          background: #ccc;
+          cursor: pointer;
+        }
+
+        .prev {
+          left: 7px;
+        }
+
+        .next {
+          right: 7px;
+        }
+
+        .gallery {
+          width: 390px;
+          overflow: hidden;
+        }
+
+        .gallery ul {
+          height: 130px;
+          width: 9999px;
+          margin: 0;
+          padding: 0;
+          list-style: none;
+          transition: margin-left 250ms;
+          font-size: 0;
+          display: flex;
+          #justify-content: space-between;
+        }
+
+    </style>
+</head>
+<body>
+<div id="carousel" class="carousel">
+    <button class="arrow prev">⇦</button>
+    <div class="gallery">
+      <ul>
+        <li><img src="https://ru.js.cx/carousel/1.png"></li>
+        <li><img src="https://ru.js.cx/carousel/2.png"></li>
+        <li><img src="https://ru.js.cx/carousel/3.png"></li>
+        <li><img src="https://ru.js.cx/carousel/4.png"></li>
+        <li><img src="https://ru.js.cx/carousel/5.png"></li>
+        <li><img src="https://ru.js.cx/carousel/6.png"></li>
+        <li><img src="https://ru.js.cx/carousel/7.png"></li>
+        <li><img src="https://ru.js.cx/carousel/8.png"></li>
+        <li><img src="https://ru.js.cx/carousel/9.png"></li>
+        <li><img src="https://ru.js.cx/carousel/10.png"></li>
+      </ul>
+    </div>
+    <button class="arrow next">⇨</button>
+  </div>
+ <script>
+    "use strict";
+
+    let carousel = document.querySelector('#carousel');
+    let listLi = carousel.querySelectorAll('li')
+    let i = 1;
+    for(let li of listLi) {
+      li.style.position = 'relative';
+      li.insertAdjacentHTML('beforeend', `<span style="position:absolute;left:0;top:0">${i}</span>`);
+      i++;
+    }
+
+    /* конфигурация */
+    let width = 130; // ширина картинки
+    let count = 3; // видимое количество изображений
+
+    let ul = carousel.querySelector('ul');
+
+    let position = 0; // положение ленты прокрутки
+
+    carousel.querySelector('.prev').onclick = function() {
+      // сдвиг влево
+      position += width * count;
+      // последнее передвижение влево может быть не на 3, а на 2 или 1 элемент
+      position = Math.min(position, 0)
+      ul.style.marginLeft = position + 'px';
+    };
+
+    carousel.querySelector('.next').onclick = function() {
+      // сдвиг вправо
+      position -= width * count;
+      // последнее передвижение вправо может быть не на 3, а на 2 или 1 элемент
+      position = Math.max(position, -width * (listLi.length - count));
+      ul.style.marginLeft = position + 'px';
+    };
+  </script>
+
+  </script>
+</body>
+</html>

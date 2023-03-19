@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .menu ul {
+          margin: 0;
+          list-style: none;
+          padding-left: 20px;
+          display: none;
+        }
+
+        .menu .title::before {
+          content: '▶ ';
+          font-size: 80%;
+          color: green;
+        }
+
+        .menu.open .title::before {
+          content: '▼ ';
+        }
+
+        .menu.open ul {
+          display: block;
+        }
+
+    </style>
+    <script src="which_handler_will_run.js"></script>
+</head>
+<body>
+    <div class="menu">
+      <span class="title">Сладости (нажми меня)!</span>
+      <ul>
+        <li>Пирожное</li>
+        <li>Пончик</li>
+        <li>Мёд</li>
+      </ul>
+    </div>
+    <script>
+        "use strict"
+
+        let menu = document.querySelector('.menu');
+        let span = menu.querySelector('.title');
+        //let ul = menu.querySelector('.menu ul');
+        span.addEventListener('click', function () {
+            menu.classList.toggle('open');
+        })
+
+    </script>
+
+</body>
+</html>

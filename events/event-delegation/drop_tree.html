@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+      .tree span:hover {
+        font-weight: bold;
+      }
+      .tree span {
+        cursor: pointer;
+      }
+      ul{
+        transition: all 1s ease;
+      }
+      ul.hidden{
+        visibility: hidden;
+        width: 0;
+        height: 0;
+        opacity: 0;
+      }
+    </style>
+</head>
+<body>
+  <ul class="tree" id="tree">
+    <li>Животные
+      <ul>
+        <li>Млекопитающие
+          <ul>
+            <li>Коровы</li>
+            <li>Ослы</li>
+            <li>Собаки</li>
+            <li>Тигры</li>
+          </ul>
+        </li>
+        <li>Другие
+          <ul>
+            <li>Змеи</li>
+            <li>Птицы</li>
+            <li>Ящерицы</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Рыбы
+      <ul>
+        <li>Аквариумные
+          <ul>
+            <li>Гуппи</li>
+            <li>Скалярии</li>
+          </ul>
+        </li>
+        <li>Морские
+          <ul>
+            <li>Морская форель</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+    <script>
+        "use strict";
+
+        let li = tree.querySelectorAll('li');
+
+        for (let l of li){
+          let span =  document.createElement('span');
+          l.prepend(span);
+          span.append(span.nextSibling);
+        }
+
+        tree.addEventListener('click', function (event) {
+          if (event.target.tagName != 'SPAN') return;
+
+          let ul = event.target.parentNode.querySelector('ul');
+
+          if (!ul) return;
+
+          ul.classList.toggle('hidden');
+
+        });
+    </script>
+</body>
+</html>
